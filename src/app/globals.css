@@ -1,0 +1,235 @@
+@import "tailwindcss";
+
+/*
+  ArtFlex design tokens
+  - Theme is locked to light (premium off-white), as briefed.
+  - Radius system: interactive controls are full pills, cards/panels are 24px, inputs 14px.
+  - Z-index scale: nav 40, mobile menu 50, cookie banner 70, page transition 80, preloader 90, grain 100.
+*/
+@theme {
+  --color-paper: #f5f3ee;
+  --color-paper-2: #ebe7de;
+  --color-paper-3: #e4dccb;
+  --color-ink: #0e1a33;
+  --color-ink-2: #1a2a4d;
+  --color-ink-soft: #46506a;
+  --color-gold: #b08a45;
+  --color-gold-deep: #7e6029;
+  --color-gold-light: #d9b970;
+
+  --font-display: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
+  --font-sans: var(--font-manrope), "Manrope", system-ui, sans-serif;
+
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-expo: cubic-bezier(0.87, 0, 0.13, 1);
+
+  --radius-card: 24px;
+
+  --animate-spin-slow: spin 28s linear infinite;
+}
+
+:root {
+  --nav-h: 72px;
+  color-scheme: light;
+}
+
+html {
+  background: var(--color-paper);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-feature-settings: "ss01", "cv11";
+  text-rendering: optimizeLegibility;
+  overflow-x: clip;
+}
+
+::selection {
+  background: var(--color-gold);
+  color: var(--color-ink);
+}
+
+/* Lenis */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: clip;
+}
+
+/* Paper grain: fixed pseudo-element only, never on scrolling containers */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+@layer components {
+/* Display type */
+.display {
+  font-family: var(--font-display);
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  line-height: 1.04;
+  text-wrap: balance;
+}
+.display em {
+  font-style: italic;
+  color: var(--color-gold);
+  /* descender clearance for italic y/g/p */
+  padding-bottom: 0.06em;
+}
+.on-ink .display em,
+.display.on-ink em {
+  color: var(--color-gold-light);
+}
+
+/* SplitText line masks need room for italic descenders */
+.split-line {
+  padding-bottom: 0.08em;
+  margin-bottom: -0.08em;
+}
+
+/* Animated underline for text links */
+.link-underline {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1px;
+  background-position: right bottom;
+  background-repeat: no-repeat;
+  transition: background-size 0.6s var(--ease-expo);
+}
+.link-underline:hover,
+.link-underline:focus-visible,
+.link-underline[aria-current="page"] {
+  background-size: 100% 1px;
+  background-position: left bottom;
+}
+}
+
+/* Policy page prose */
+@layer components {
+  .legal > * + * {
+    margin-top: 1.1rem;
+  }
+  .legal h2 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: clamp(1.7rem, 3vw, 2.3rem);
+    line-height: 1.15;
+    margin-top: 3rem;
+  }
+  .legal p,
+  .legal li {
+    font-size: 1.0625rem;
+    line-height: 1.75;
+    color: var(--color-ink-soft);
+  }
+  .legal ul {
+    list-style: disc;
+    padding-left: 1.25rem;
+  }
+  .legal li + li {
+    margin-top: 0.4rem;
+  }
+  .legal strong {
+    color: var(--color-ink);
+    font-weight: 600;
+  }
+  .legal a {
+    color: var(--color-ink);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .legal table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+  }
+  .legal th,
+  .legal td {
+    text-align: left;
+    padding: 0.75rem 0.75rem 0.75rem 0;
+    border-bottom: 1px solid rgb(14 26 51 / 0.12);
+    vertical-align: top;
+    color: var(--color-ink-soft);
+  }
+  .legal th {
+    color: var(--color-ink);
+    font-weight: 600;
+  }
+}
+
+/* Focus ring */
+:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* Hero copy is hidden until its entrance runs (JS only) */
+.js [data-hero-reveal] {
+  visibility: hidden;
+}
+.af-skip-preload .preloader {
+  display: none;
+}
+
+@layer components {
+/* Logo silhouettes recoloured with CSS masks */
+.logo-mask {
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  background-color: var(--color-ink);
+  transition:
+    background-color 0.5s var(--ease-expo),
+    transform 0.6s var(--ease-expo),
+    scale 0.6s var(--ease-expo);
+}
+
+/* Accordion: grid-rows trick, no height animation */
+.accordion-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.6s var(--ease-expo);
+}
+.accordion-panel[data-open="true"] {
+  grid-template-rows: 1fr;
+}
+.accordion-panel > div {
+  overflow: hidden;
+}
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js [data-hero-reveal] {
+    visibility: visible;
+  }
+  .preloader {
+    display: none;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
