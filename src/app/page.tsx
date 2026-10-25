@@ -1,6 +1,6 @@
 import { ArrowUpRight, MapPinLine, UsersThree } from "@phosphor-icons/react/ssr";
 import { wrap } from "@/lib/ui";
-import { clients } from "@/lib/site";
+import { clients, stripOnlyLogos } from "@/lib/site";
 import { SplitReveal } from "@/components/SplitReveal";
 import { Reveal } from "@/components/Reveal";
 import { Button } from "@/components/Button";
@@ -50,11 +50,16 @@ export default function Home() {
         <Reveal as="p" className={`${wrap} mb-8 text-center text-ink-soft`}>
           Brands we&apos;ve grown with
         </Reveal>
-        <Marquee speed={36} label="Client logos">
+        <Marquee speed={60} label="Client logos">
           {clients.map((c) => (
             <TLink key={c.slug} href={`/work#${c.slug}`} className="group mx-8 grid h-24 place-items-center sm:mx-14" aria-label={c.name}>
               <ClientLogo client={c} height={72} className="group-hover:scale-110 group-hover:!bg-gold-deep" />
             </TLink>
+          ))}
+          {stripOnlyLogos.map((c) => (
+            <span key={c.slug} className="group mx-8 grid h-24 place-items-center sm:mx-14">
+              <ClientLogo client={c} height={72} className="group-hover:scale-110 group-hover:!bg-gold-deep" />
+            </span>
           ))}
         </Marquee>
       </section>

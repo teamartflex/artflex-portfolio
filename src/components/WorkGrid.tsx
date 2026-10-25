@@ -5,7 +5,18 @@ import Image from "next/image";
 import { gsap, useGSAP, canHover, prefersReducedMotion } from "@/lib/gsap";
 import { clients } from "@/lib/site";
 
-const spans = ["md:col-span-7", "md:col-span-5 md:mt-28", "md:col-span-5", "md:col-span-7 md:mt-28", "md:col-span-6", "md:col-span-6 md:mt-28"];
+// rows of 7+5, 5+7, 6+6, then a staggered trio of 4+4+4 (one entry per client, in order)
+const spans = [
+  "md:col-span-7",
+  "md:col-span-5 md:mt-28",
+  "md:col-span-5",
+  "md:col-span-7 md:mt-28",
+  "md:col-span-6",
+  "md:col-span-6 md:mt-28",
+  "md:col-span-4",
+  "md:col-span-4 md:mt-20",
+  "md:col-span-4 md:mt-40",
+];
 
 /** Client cards: rise in on scroll, tilt toward the cursor with a moving sheen. */
 export function WorkGrid() {

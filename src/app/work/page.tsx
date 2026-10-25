@@ -9,7 +9,7 @@ import { CTASection } from "@/components/CTASection";
 
 export const metadata: Metadata = {
   title: "Work",
-  description: "Hospitality, jewellery, eyewear and dining brands that trust ArtFlex with their marketing.",
+  description: "Hospitality, jewellery, eyewear, dining and real estate brands that trust ArtFlex with their marketing.",
 };
 
 export default function WorkPage() {
@@ -20,7 +20,7 @@ export default function WorkPage() {
           Brands we&apos;ve helped <em>grow.</em>
         </SplitReveal>
         <Reveal hero delay={0.35} as="p" className="mt-8 max-w-[46ch] text-lg leading-relaxed text-ink-soft sm:text-xl">
-          Hospitality, jewellery, eyewear, dining and more. A few of the businesses that trust ArtFlex with their growth.
+          Hospitality, jewellery, eyewear, real estate and more. A few of the businesses that trust ArtFlex with their growth.
         </Reveal>
       </section>
 

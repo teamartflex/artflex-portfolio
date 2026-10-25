@@ -100,6 +100,42 @@ export const clients: Client[] = [
     mask: "/clients/vayu-go-mask.png",
     ratio: 640 / 278,
   },
+  {
+    slug: "tara-tarini-optics",
+    name: "Tara Tarini Optics",
+    sector: "Eyewear retail",
+    services: ["Social media", "Performance ads"], // TODO(client)
+    tone: "#f4f1ea",
+    logo: "/clients/tara-tarini-optics.png",
+    mask: "/clients/tara-tarini-optics-mask.png",
+    ratio: 413 / 227,
+  },
+  {
+    slug: "chandan-construction",
+    name: "Chandan Construction & Real Estate",
+    sector: "Construction & real estate",
+    services: ["Lead generation", "Social media"], // TODO(client)
+    tone: "#f4f1ea",
+    logo: "/clients/chandan-construction.png",
+    mask: "/clients/chandan-construction-mask.png",
+    ratio: 413 / 259,
+  },
+  {
+    slug: "odia-grihasthali",
+    name: "Odia Grihasthali Properties",
+    sector: "Real estate",
+    services: ["Lead generation", "Performance ads"], // TODO(client)
+    tone: "#f4f1ea",
+    logo: "/clients/odia-grihasthali.png",
+    mask: "/clients/odia-grihasthali-mask.png",
+    ratio: 390 / 186,
+  },
+];
+
+/** Logos shown only in the scrolling logo strip (brand name not confirmed yet). */
+export const stripOnlyLogos: Pick<Client, "slug" | "name" | "mask" | "ratio">[] = [
+  // TODO(client): add the brand name, then move this into `clients` above
+  { slug: "sjg-monogram", name: "Client logo", mask: "/clients/sjg-monogram-mask.png", ratio: 195 / 277 },
 ];
 
 export type Service = {
