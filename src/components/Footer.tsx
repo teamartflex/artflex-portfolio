@@ -124,6 +124,15 @@ export function Footer() {
           </ul>
         </div>
       </div>
+
+      {/* Credits ribbon: sits outside the parallax layer so it stays anchored to the page bottom */}
+      <div className="relative border-t border-paper/10 bg-[#091226]">
+        <p className="mx-auto flex max-w-[1400px] flex-wrap items-center justify-center gap-x-3 gap-y-2 px-4 py-4 text-[13px] tracking-[0.04em] text-paper/70 sm:px-6 lg:px-10">
+          Designed &amp; developed by
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/brand/crayora-white.png" alt="Crayora" width={720} height={194} className="crayora-glow h-6 w-auto sm:h-7" />
+        </p>
+      </div>
     </footer>
   );
 }

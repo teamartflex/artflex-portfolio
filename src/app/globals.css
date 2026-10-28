@@ -173,6 +173,26 @@ body::after {
   }
 }
 
+/* Crayora credit: soft violet glow (the star's brand colour) that slowly breathes */
+.crayora-glow {
+  filter: drop-shadow(0 0 4px rgb(79 66 252 / 0.85)) drop-shadow(0 0 14px rgb(79 66 252 / 0.5));
+  transition: filter 0.5s var(--ease-expo);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .crayora-glow {
+    animation: crayora-breathe 3.2s ease-in-out infinite;
+  }
+}
+@keyframes crayora-breathe {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 3px rgb(79 66 252 / 0.7)) drop-shadow(0 0 10px rgb(79 66 252 / 0.35));
+  }
+  50% {
+    filter: drop-shadow(0 0 6px rgb(79 66 252 / 1)) drop-shadow(0 0 22px rgb(79 66 252 / 0.65));
+  }
+}
+
 /* Focus ring */
 :focus-visible {
   outline: 2px solid var(--color-gold);
